@@ -1,48 +1,48 @@
 # docker-compose example
 
-version: '3.3'
+version: '3.7'
 
 services:
 
   application:
-    container_name: application
-    hostname: application.iteratec.de
+    #container_name: application not supported by kubernetes anymore
+    #hostname: application.iteratec.de
     image: openjdk:8
     environment: 
-      SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/databaseForExampleApp
+      SPRING_DATASOURCE_URL: jdbc:postgresql://database:5432/databaseForExampleApp
       DB_USER: sameUser
       DB_PASSWORD: somePassword
-    links:
-      - database
-    networks:
-      - applictaionNetwork
+    #links:
+    #  - database
+    #networks:
+    #  - applictaionNetwork
     ports: 
-    - 1234:1234
+    - 1234
     #user: TODO
     volumes:
     - ./example/build/libs/gs-spring-boot-0.1.0.jar:/application.jar
     command: java -jar application.jar
-    restart: always
+    #restart: always
 
   database:
-    container_name: database
-    hostname: database.iteratec.de
+    #container_name: database
+    #hostname: database.iteratec.de
     image: postgres:9.6
     environment:
       POSTGRES_USER: sameUser
       POSTGRES_DB: databaseForExampleApp
       POSTGRES_PASSWORD: somePassword
-    networks:
-      - applictaionNetwork
+    #networks:
+    #  - applictaionNetwork
     ports:
-    - 5432:5432
+    - 5432
     #user: TODO
     volumes:
     - DBVolume:/var/lib/postgresql/data
-    restart: always
+    #restart: always
 
-networks:
-  applictaionNetwork: {}
+#networks:
+  #applictaionNetwork: {}
 
 volumes: 
   DBVolume: {}
