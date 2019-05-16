@@ -1,6 +1,6 @@
 # docker-compose example
 
-version: '3.7'
+version: '3.3'
 
 services:
 
@@ -38,11 +38,11 @@ services:
     - 5432
     #user: TODO
     volumes:
-    - DBVolume:/var/lib/postgresql/data
+    - dbvolume:/var/lib/postgresql/data
     #restart: always
 
 #networks:
   #applictaionNetwork: {}
 
 volumes: 
-  DBVolume: {}
+  dbvolume: {}
